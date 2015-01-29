@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="fill_horizontal" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="fill_horizontal"
+            android:text="查看动态"
+            style="?android:attr/buttonBarButtonStyle"  />
+
+        <Button 
+            android:id="@+id/button2"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="申请加入"
+            style="?android:attr/buttonBarButtonStyle"  />
+        
+        <Button 
+            android:id="@+id/button3"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="查看成员"
+            style="?android:attr/buttonBarButtonStyle"  />
+    </LinearLayout>
+
+</LinearLayout>
+<!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/club_detail_layout.xml -->

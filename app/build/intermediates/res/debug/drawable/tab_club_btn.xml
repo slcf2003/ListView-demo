@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<item android:drawable="@android:drawable/ic_menu_gallery"/> 
+</selector>
+<!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/drawable/tab_club_btn.xml -->

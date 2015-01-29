@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- ImageView  
+        android:id="@+id/imageview"  
+        android:layout_width="fill_parent"  
+        android:layout_height="fill_parent"  
+        android:scaleType="fitCenter"  
+        android:src="@drawable/xianjian01" 
+        android:contentDescription="@string/imgdesc" >  
+    </ImageView-->
+    
+    <!-- TextView 
+        android:id="@+id/json"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="Json" /-->
+
+    <!--ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_centerHorizontal="true" /-->
+    
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"  
+        android:drawSelectorOnTop="false"/>  
+
+</LinearLayout>
+<!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/main_activity.xml -->
