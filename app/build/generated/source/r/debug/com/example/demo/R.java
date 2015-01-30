@@ -16,27 +16,29 @@ public final class R {
     }
     public static final class drawable {
         public static final int airplane=0x7f020000;
-        public static final int excel=0x7f020001;
-        public static final int home_btn_bg=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int lync=0x7f020004;
-        public static final int maintab_toolbar_bg=0x7f020005;
-        public static final int note=0x7f020006;
-        public static final int out=0x7f020007;
-        public static final int pic1=0x7f020008;
-        public static final int pic2=0x7f020009;
-        public static final int pic3=0x7f02000a;
-        public static final int power=0x7f02000b;
-        public static final int pub=0x7f02000c;
-        public static final int screen=0x7f02000d;
-        public static final int selector_tab_background=0x7f02000e;
-        public static final int tab_activity_btn=0x7f02000f;
-        public static final int tab_club_btn=0x7f020010;
-        public static final int tab_mine_btn=0x7f020011;
-        public static final int word=0x7f020012;
-        public static final int xianjian01=0x7f020013;
-        public static final int xianjian02=0x7f020014;
-        public static final int xianjian03=0x7f020015;
+        public static final int apple=0x7f020001;
+        public static final int excel=0x7f020002;
+        public static final int home_btn_bg=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int lync=0x7f020005;
+        public static final int maintab_toolbar_bg=0x7f020006;
+        public static final int note=0x7f020007;
+        public static final int out=0x7f020008;
+        public static final int pic1=0x7f020009;
+        public static final int pic2=0x7f02000a;
+        public static final int pic3=0x7f02000b;
+        public static final int power=0x7f02000c;
+        public static final int pub=0x7f02000d;
+        public static final int screen=0x7f02000e;
+        public static final int screen2=0x7f02000f;
+        public static final int selector_tab_background=0x7f020010;
+        public static final int tab_activity_btn=0x7f020011;
+        public static final int tab_club_btn=0x7f020012;
+        public static final int tab_mine_btn=0x7f020013;
+        public static final int word=0x7f020014;
+        public static final int xianjian01=0x7f020015;
+        public static final int xianjian02=0x7f020016;
+        public static final int xianjian03=0x7f020017;
     }
     public static final class id {
         public static final int action_help=0x7f080013;
@@ -66,7 +68,7 @@ public final class R {
         public static final int club_list_layout=0x7f030002;
         public static final int load_more=0x7f030003;
         public static final int loading=0x7f030004;
-        public static final int loading_activity=0x7f030005;
+        public static final int loading =0x7f030005;
         public static final int main=0x7f030006;
         public static final int main_activity=0x7f030007;
         public static final int main_club=0x7f030008;
@@ -89,7 +91,8 @@ public final class R {
         public static final int hello_world=0x7f050007;
         public static final int imgdesc=0x7f050008;
         public static final int load_more=0x7f050009;
-        public static final int text=0x7f05000a;
+        public static final int loading=0x7f05000a;
+        public static final int text=0x7f05000b;
     }
     public static final class style {
         /** 

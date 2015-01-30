@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/splashimg"
-    android:src="@drawable/note"
-    android:contentDescription="@string/imgdesc" >
-    
-</ImageView>
-<!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/splash.xml -->
+
+<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SplashActivity"-->
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/splashimg"
+        android:src="@drawable/apple"
+        android:contentDescription="@string/imgdesc" >
+
+    </ImageView>
+<!--/LinearLayout--><!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/splash.xml -->

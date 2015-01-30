@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,28 +17,34 @@ import com.example.demo.R;
 
 public class SplashActivity extends Activity {
 
-	public String earned;
+//	public String earned;
 	private String[] title;
 	private String[] desc;
 	String json;
+    private Handler mHandler = new Handler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splash);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
-				, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         long num = System.currentTimeMillis() + 5*1000;
-        while (System.currentTimeMillis() <= num){
-        }
+//        while (System.currentTimeMillis() <= num){}
 
-        Intent intent = new Intent();
-        intent.setClass(this, TabHostActivity.class);
-        startActivity(intent);
-        SplashActivity.this.finish();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.setClass(SplashActivity.this, TabHostActivity.class);
+                startActivity(intent);
+                SplashActivity.this.finish();
+            }
+        }, 5 * 1000);
+
+
 /*		
 		new Handler().postDelayed(new Runnable(){
 
@@ -94,7 +101,6 @@ public class SplashActivity extends Activity {
                 }
  
             }
- 
             return null;
 		}
 

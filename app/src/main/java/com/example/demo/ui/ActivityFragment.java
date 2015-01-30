@@ -85,7 +85,7 @@ public class ActivityFragment extends ListFragment implements OnScrollListener{
 //		String str = bundle.getString("json");
 		
 //		text.setText(str);
-        Log.d("ActivityFragment", "OnCreateView is called" );
+        Log.d(TAG, "OnCreateView is called" );
 //		Toast.makeText(getActivity(), "OnCreateView in ActivityFragment", Toast.LENGTH_SHORT).show();
 
 		return v;

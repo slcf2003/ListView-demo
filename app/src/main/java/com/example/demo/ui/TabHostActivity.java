@@ -18,35 +18,49 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class TabHostActivity extends FragmentActivity implements OnLoadingListener{
-	
-	private LayoutInflater layoutInflater;
+public class TabHostActivity extends FragmentActivity implements OnLoadingListener, TabHost.OnTabChangeListener{
+
+    private static final String TAG = "TabHostActivity";
+
+    private LayoutInflater layoutInflater;
 	private FragmentTabHost mtabHost;
 	Bundle mbundle;
-    FragmentManager manager = getSupportFragmentManager();
+    FragmentManager manager;
 	
 	//Tabѡ�������  
-    private String mTabs[] = {"Activity", "Club֯", "Settings"};
+    private String mTabs[] = {"Activity", "Club", "Settings"};
+//    private Class fragmentArray[] = {ActivityLoading.class,Club.class,Mine.class};
     private Class fragmentArray[] = {ActivityLoading.class,Club.class,Mine.class};
     private int mBtnArray[] = {R.drawable.tab_activity_btn,R.drawable.tab_club_btn,R.drawable.tab_mine_btn};
 
     @Override
-    public void onFinished(int index, Bundle bundle) {
+    public void onLoadingFinished(int index, Bundle bundle) {
+        FragmentTransaction fragmentTransaction;
         switch (index){
             case 1:
                 mbundle = bundle;
-                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction = manager.beginTransaction();
                 ActivityFragment activity = new ActivityFragment();
                 activity.setArguments(mbundle);
                 fragmentTransaction.replace(R.id.realtabcontent, activity);
-                fragmentTransaction.commit();
-//                return;
+                fragmentTransaction.commitAllowingStateLoss();
+                break;
             case 2:
-                return;
+                mbundle = bundle;
+                fragmentTransaction = manager.beginTransaction();
+                ClubFragment club = new ClubFragment();
+                club.setArguments(mbundle);
+                fragmentTransaction.replace(R.id.realtabcontent, club);
+                fragmentTransaction.commitAllowingStateLoss();
+                break;
+            case 3:
+                break;
             default:
+                break;
         }
     }
 
@@ -76,20 +90,20 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 			Log.d("Bundle", "bundle is not null");
 		} 
 */
+        manager = getSupportFragmentManager();
 		initView();
-
 	}
 	
 	private void initView(){
 		layoutInflater = LayoutInflater.from(this);
 		
 		mtabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
-		mtabHost.setup(this, manager, R.id.realtabcontent);
-		
+//		mtabHost.setup(this, manager, R.id.realtabcontent);
+		mtabHost.setup(this, manager);
+
 		int count = fragmentArray.length;
 		
 //		Log.d("TabHost", "fragmentArray.length = "+ count);
-		
 		
 		for(int i = 0; i < count; i++){
 			TabSpec tabspec = mtabHost.newTabSpec(mTabs[i]).setIndicator(getTabItemView(i));
@@ -99,7 +113,8 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 				mtabHost.addTab(tabspec, fragmentArray[i], null);
 //			}
 			mtabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.selector_tab_background);
-		}	
+		}
+        mtabHost.setOnTabChangedListener(this);
 	}
 	
 	private View getTabItemView(int index){
@@ -113,8 +128,29 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 		
 		return view;
 	}
-	
-	@Override
+
+    @Override
+    public void onTabChanged(String tabId) {
+        Log.d(TAG, "onTabChanged is called");
+
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        switch (tabId){
+            case "Activity":
+                ActivityLoading activityLoading = new ActivityLoading();
+                fragmentTransaction.replace(R.id.realtabcontent, activityLoading);
+                fragmentTransaction.commit();
+                break;
+            case "Club":
+                break;
+            case "Settings":
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
