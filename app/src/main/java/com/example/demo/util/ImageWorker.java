@@ -1,10 +1,5 @@
 package com.example.demo.util;
 
-import java.lang.ref.WeakReference;
-
-import com.example.demo.R;
-import com.example.demo.R.drawable;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -14,6 +9,16 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.example.demo.R;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
 
 public class ImageWorker{	
 
@@ -140,6 +145,44 @@ public class ImageWorker{
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static Bitmap decodeSampledBitmapFromURL(Resources res, String url,
+                                                         int reqWidth, int reqHeight) {
+
+        final DefaultHttpClient client = new DefaultHttpClient();
+        HttpGet g = new HttpGet(params[0]);
+        InputStream input = null;
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+
+        try{
+            HttpResponse response = client.execute(g);
+            HttpEntity entity = response.getEntity();
+
+            if (entity != null){
+                try{
+                    input = entity.getContent();
+                    // First decode with inJustDecodeBounds=true to check dimensions
+
+                    options.inJustDecodeBounds = true;
+//                    BitmapFactory.decodeResource(res, resId, options);
+                    BitmapFactory.decodeStream(input, null, options);
+
+                    // Calculate inSampleSize
+                    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+                    // Decode bitmap with inSampleSize set
+                    options.inJustDecodeBounds = false;
+                } finally {
+                    input.close();
+                }
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return BitmapFactory.decodeStream(input, null, options);
     }
     
     public static int calculateInSampleSize(
