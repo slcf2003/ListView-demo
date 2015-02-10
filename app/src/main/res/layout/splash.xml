@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:id="@+id/splashimg"
         android:src="@drawable/apple"
-        android:contentDescription="@string/imgdesc" >
+        android:contentDescription="@string/img_desc" >
 
     </ImageView>
 <!--/LinearLayout-->

@@ -34,7 +34,7 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 	//Tabѡ�������  
     private String mTabs[] = {"Activity", "Club", "Settings"};
 //    private Class fragmentArray[] = {ActivityLoading.class,Club.class,Mine.class};
-    private Class fragmentArray[] = {ActivityLoading.class,Club.class,Mine.class};
+    private Class fragmentArray[] = {ActivityLoading.class,ClubLoading.class,Mine.class};
     private int mBtnArray[] = {R.drawable.tab_activity_btn,R.drawable.tab_club_btn,R.drawable.tab_mine_btn};
 
     @Override
@@ -98,8 +98,8 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 		layoutInflater = LayoutInflater.from(this);
 		
 		mtabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
-//		mtabHost.setup(this, manager, R.id.realtabcontent);
-		mtabHost.setup(this, manager);
+		mtabHost.setup(this, manager, R.id.realtabcontent);
+//		mtabHost.setup(this, manager);
 
 		int count = fragmentArray.length;
 		
@@ -115,6 +115,7 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
 			mtabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.selector_tab_background);
 		}
         mtabHost.setOnTabChangedListener(this);
+
 	}
 	
 	private View getTabItemView(int index){
@@ -141,6 +142,9 @@ public class TabHostActivity extends FragmentActivity implements OnLoadingListen
                 fragmentTransaction.commit();
                 break;
             case "Club":
+                ClubLoading clubLoading = new ClubLoading();
+                fragmentTransaction.replace(R.id.realtabcontent, clubLoading);
+                fragmentTransaction.commit();
                 break;
             case "Settings":
                 break;

@@ -10,7 +10,7 @@
         android:layout_height="fill_parent"  
         android:scaleType="fitCenter"  
         android:src="@drawable/xianjian03"
-        android:contentDescription="@string/imgdesc" >  
+        android:contentDescription="@string/img_desc" >
     </ImageView>  
     
 </LinearLayout>

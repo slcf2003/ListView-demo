@@ -12,7 +12,7 @@
         android:focusable="false"  
         android:padding="3dp"   
         android:src="@drawable/tab_activity_btn"
-        android:contentDescription="@string/imgdesc" >  
+        android:contentDescription="@string/img_desc" >
     </ImageView>  
   
     <TextView  

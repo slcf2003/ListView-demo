@@ -1,34 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?> 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-	android:layout_width="fill_parent"
-    android:layout_height="fill_parent"> 
-    <ImageView android:id="@+id/thumbnail" android:layout_width="81dip" 
-        android:layout_height="81dip" android:scaleType="fitCenter" 
-        android:adjustViewBounds="true" android:layout_alignParentLeft="true" 
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ImageView android:id="@+id/thumbnail" android:layout_width="100dip"
+        android:layout_height="100dip" android:scaleType="fitCenter"
+        android:adjustViewBounds="true" android:layout_alignParentLeft="true"
         android:layout_margin="5dip"
-        android:contentDescription="@string/imgdesc">
-    </ImageView> 
-    
-    <LinearLayout 
-        android:layout_toRightOf="@+id/thumbnail"
-        android:layout_height="fill_parent"
-        android:layout_width="wrap_content"
-        android:orientation="vertical">
-        
-        <TextView android:id="@+id/title" android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" android:textSize="14dip" >
-	    </TextView> 
-	    
-	    <TextView android:id="@+id/member" android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" android:textSize="10dip" >
-	    </TextView> 
-	    
-	    <TextView android:id="@+id/desc" android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" android:textSize="10dip" >
-	    </TextView> 
-	        
-    </LinearLayout>
-    
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/img_desc">
+    </ImageView>
+
+    <TextView android:id="@+id/title" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:textSize="14sp"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_alignTop="@id/thumbnail"
+        android:layout_alignParentRight="true">
+    </TextView>
+
+    <TextView android:id="@+id/desc" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:textSize="12sp"
+        android:layout_alignStart="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_below="@id/title"
+        android:layout_alignParentRight="true">
+    </TextView>
+
+
     <!-- TextView android:id="@+id/title" android:layout_width="wrap_content" 
         android:layout_height="wrap_content" android:textSize="14dip" 
         android:layout_toRightOf="@+id/thumbnail" android:layout_alignTop="@+id/thumbnail">
@@ -42,6 +39,6 @@
     <TextView android:id="@+id/desc" android:layout_width="wrap_content" 
         android:layout_height="wrap_content" android:textSize="10dip" 
         android:layout_toRightOf="@+id/thumbnail" android:layout_below="@+id/thumbnail">
-    </TextView--> 
-    
+    </TextView-->
+
 </RelativeLayout> 

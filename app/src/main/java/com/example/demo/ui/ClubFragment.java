@@ -42,7 +42,7 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
     private MyAdapter mAdapter;
 
 
-    ArrayList<HashMap<String, String>> data;
+    List<HashMap<String, String>> data;
 
     @Override
     public void onAttach(Activity activity) {
@@ -88,11 +88,12 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
 
         bundle = this.getArguments();
         data = getData(bundle);
+        Toast.makeText(getActivity(), "size of data is " + data.size(), Toast.LENGTH_SHORT).show();
 
         mAdapter = new MyAdapter(getActivity(), data);
         mImageWorker = new ImageWorker(getActivity());
 
-        ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams("thumb");
+        ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams("club_thumb");
         mImageWorker.setImageCache(ImageCache.findOrCreateCache(getActivity(), cacheParams));
     }
 
@@ -117,9 +118,9 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
         getListView().setOnScrollListener(this);
     }
 
-    private ArrayList<HashMap<String, String>> getData(Bundle bundle){
+    private List<HashMap<String, String>> getData(Bundle bundle){
         String[] title, desc, img;
-        ArrayList<HashMap<String, String>> mHashmaps = new ArrayList<HashMap<String, String>>();
+        List<HashMap<String, String>> mHashmaps = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map;
 
         title = bundle.getStringArray("title");
@@ -177,9 +178,9 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
 
         LayoutInflater inflater;
         Context context;
-        ArrayList<HashMap<String, String>> data;
+        List<HashMap<String, String>> data;
 
-        MyAdapter(Context context, ArrayList<HashMap<String, String>> data){
+        MyAdapter(Context context, List<HashMap<String, String>> data){
             this.context = context;
             this.data = data;
         }
@@ -187,7 +188,9 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return (data.size()<10)?data.size():10;
+            Log.d(TAG, "getCount() is called");
+        //    return (data.size()<10)?data.size():10;
+            return data.size();
         }
 
         @Override
@@ -221,10 +224,11 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
                 holder = (ViewHolder)convertView.getTag();
             }
 
-            holder.title.setText(data.get(position).get("title").toString());
-            holder.desc.setText(data.get(position).get("desc").toString());
+            holder.title.setText(data.get(position).get("title"));
+            holder.desc.setText(data.get(position).get("desc"));
             //		holder.img.setImageResource((Integer) data.get(position).get("img"));
-            mImageWorker.loadBitmap((Integer) data.get(position).get("img"), holder.img);
+//            Log.d(TAG,data.get(position).get("img"));
+            mImageWorker.loadBitmap(data.get(position).get("img"), holder.img);
 
             convertView.setOnClickListener(new View.OnClickListener(){
                 @Override

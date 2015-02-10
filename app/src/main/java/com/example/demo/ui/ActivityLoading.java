@@ -105,6 +105,7 @@ public class ActivityLoading extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.loading, container, false);
+        Log.d(TAG, "onCreateView is called");
         return v;
     }
 

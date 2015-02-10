@@ -17,10 +17,15 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ImageWorker{	
+
+    static final String TAG = "ImageWorker";
 
 	protected Context mContext;
 	private ImageCache mImageCache;
@@ -29,12 +34,12 @@ public class ImageWorker{
 		mContext = context;
 	}
 	
-	public void loadBitmap(int resId, ImageView imageView) {
+	public void loadBitmap(String url, ImageView imageView) {
         Bitmap bitmap = null;
 
         if (mImageCache != null) {
         	Log.v("loadBitmap","mImageCache is not null");
-            bitmap = mImageCache.getBitmapFromMemCache(String.valueOf(resId));
+            bitmap = mImageCache.getBitmapFromMemCache(String.valueOf(url.substring(url.lastIndexOf("/"))));
         }
         
         Log.v("loadBitmap","checked mImageCache");
@@ -42,11 +47,11 @@ public class ImageWorker{
         if (bitmap != null) {
             // Bitmap found in memory cache
             imageView.setImageBitmap(bitmap);
-        } else if (cancelPotentialWork(resId, imageView)) {
+        } else if (cancelPotentialWork(url, imageView)) {
 			final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-	        final AsyncDrawable asyncDrawable = new AsyncDrawable(mContext.getResources(), decodeSampledBitmapFromResource(mContext.getResources(), R.drawable.ic_launcher, 81, 81), task);
+	        final AsyncDrawable asyncDrawable = new AsyncDrawable(mContext.getResources(), decodeSampledBitmapFromResource(mContext.getResources(), R.drawable.thumb_holder, 81, 81), task);
 	        imageView.setImageDrawable(asyncDrawable);
-	        task.execute(resId);
+	        task.execute(url);
 	    }
 	}
 	
@@ -67,12 +72,12 @@ public class ImageWorker{
         }
     }
 	
-	public static boolean cancelPotentialWork(int data, ImageView imageView) {
+	public static boolean cancelPotentialWork(String url, ImageView imageView) {
         final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
         if (bitmapWorkerTask != null) {
-            final int bitmapData = bitmapWorkerTask.data;
-            if (bitmapData != data) {
+            final String bitmapData = bitmapWorkerTask.url;
+            if (bitmapData != url) {
                 // Cancel previous task
                 bitmapWorkerTask.cancel(true);
             } else {
@@ -95,9 +100,9 @@ public class ImageWorker{
         return null;
     }
     
-    class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
+    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
     	private final WeakReference<ImageView> imageViewReference;
-        private int data = 0;
+        private String url = "";
 
         public BitmapWorkerTask(ImageView imageView) {
             // Use a WeakReference to ensure the ImageView can be garbage collected
@@ -106,11 +111,12 @@ public class ImageWorker{
 
         // Decode image in background.
         @Override
-        protected Bitmap doInBackground(Integer... params) {
-            data = params[0];
+        protected Bitmap doInBackground(String... params) {
+            url = params[0];
 //            return decodeSampledBitmapFromResource(getResources(), data, 100, 100);
-            final Bitmap bitmap = decodeSampledBitmapFromResource(mContext.getResources(), data, 100, 100);
-            mImageCache.addBitmapToCache(String.valueOf(data), bitmap);
+//            final Bitmap bitmap2 = decodeSampledBitmapFromResource(mContext.getResources(), data, 100, 100);
+            final Bitmap bitmap = decodeSampledBitmapFromURL(mContext.getResources(), url, 100, 100);
+            mImageCache.addBitmapToCache(url.substring(url.lastIndexOf("/")), bitmap);
             return bitmap;
         }
 
@@ -147,42 +153,58 @@ public class ImageWorker{
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static Bitmap decodeSampledBitmapFromURL(Resources res, String url,
+    public static Bitmap decodeSampledBitmapFromURL(Resources res, String link,
                                                          int reqWidth, int reqHeight) {
 
-        final DefaultHttpClient client = new DefaultHttpClient();
-        HttpGet g = new HttpGet(params[0]);
+//        final DefaultHttpClient client = new DefaultHttpClient();
+//        HttpGet g = new HttpGet(url);
+        Bitmap bitmap = null;
         InputStream input = null;
+        HttpURLConnection conn = null;
         final BitmapFactory.Options options = new BitmapFactory.Options();
 
         try{
-            HttpResponse response = client.execute(g);
-            HttpEntity entity = response.getEntity();
+            URL url = new URL(link);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(10000);
+            conn.setDoInput(true);
+            conn.setRequestMethod("GET");
+            conn.connect();
+            int response = conn.getResponseCode();
+//            Log.d(TAG, "The response is: " + response);
 
-            if (entity != null){
-                try{
-                    input = entity.getContent();
-                    // First decode with inJustDecodeBounds=true to check dimensions
+//            HttpResponse response = client.execute(g);
+//            HttpEntity entity = response.getEntity();
 
-                    options.inJustDecodeBounds = true;
+            if (response == 200){
+                input = conn.getInputStream();
+                // First decode with inJustDecodeBounds=true to check dimensions
+//                conn.disconnect();
+                options.inJustDecodeBounds = true;
 //                    BitmapFactory.decodeResource(res, resId, options);
-                    BitmapFactory.decodeStream(input, null, options);
+//                Log.d(TAG, "input is "+input.available());
+                BitmapFactory.decodeStream(input, null, options);
 
-                    // Calculate inSampleSize
-                    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+                // Calculate inSampleSize
+                options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
-                    // Decode bitmap with inSampleSize set
-                    options.inJustDecodeBounds = false;
-                } finally {
-                    input.close();
-                }
+                // Decode bitmap with inSampleSize set
+                options.inJustDecodeBounds = false;
+                conn = (HttpURLConnection) url.openConnection();
+                input = conn.getInputStream();
+//                Log.d(TAG, "input is "+input.available());
+                bitmap = BitmapFactory.decodeStream(input, null, options);
+                if (input != null) input.close();
             }
 
         } catch (Exception e){
             e.printStackTrace();
+            Log.e(TAG, "error when creating input stream");
+        } finally {
+            conn.disconnect();
         }
 
-        return BitmapFactory.decodeStream(input, null, options);
+        return bitmap;
     }
     
     public static int calculateInSampleSize(
