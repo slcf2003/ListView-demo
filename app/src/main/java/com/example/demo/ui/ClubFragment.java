@@ -100,6 +100,7 @@ public class ClubFragment extends ListFragment implements OnScrollListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
+        container.removeAllViewsInLayout();
         View v = inflater.inflate(R.layout.main_club, container, false);
         Log.d(TAG, "OnCreateView is called" );
 //		Toast.makeText(getActivity(), "OnCreateView in ActivityFragment", Toast.LENGTH_SHORT).show();

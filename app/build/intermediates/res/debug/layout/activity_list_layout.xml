@@ -19,4 +19,4 @@
         android:layout_toRightOf="@+id/thumbnail" android:layout_below="@+id/thumbnail">
     </TextView> 
 </RelativeLayout> 
-<!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/activity_list_layout.xml -->
+<!-- From: file:/M:/Android/ListView_demo/app/src/main/res/layout/activity_list_layout.xml -->

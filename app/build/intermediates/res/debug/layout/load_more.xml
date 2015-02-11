@@ -17,4 +17,4 @@
         android:text="@string/load_more"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</LinearLayout><!-- From: file:/C:/Users/yhua/AndroidStudioProjects/demo/app/src/main/res/layout/load_more.xml -->
+</LinearLayout><!-- From: file:/M:/Android/ListView_demo/app/src/main/res/layout/load_more.xml -->

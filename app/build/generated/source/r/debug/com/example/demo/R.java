@@ -24,19 +24,22 @@ public final class R {
         public static final int maintab_toolbar_bg=0x7f020006;
         public static final int note=0x7f020007;
         public static final int out=0x7f020008;
-        public static final int power=0x7f020009;
-        public static final int pub=0x7f02000a;
-        public static final int screen=0x7f02000b;
-        public static final int screen2=0x7f02000c;
-        public static final int selector_tab_background=0x7f02000d;
-        public static final int tab_activity_btn=0x7f02000e;
-        public static final int tab_club_btn=0x7f02000f;
-        public static final int tab_mine_btn=0x7f020010;
-        public static final int thumb_holder=0x7f020011;
-        public static final int word=0x7f020012;
-        public static final int xianjian01=0x7f020013;
-        public static final int xianjian02=0x7f020014;
-        public static final int xianjian03=0x7f020015;
+        public static final int pic1=0x7f020009;
+        public static final int pic2=0x7f02000a;
+        public static final int pic3=0x7f02000b;
+        public static final int power=0x7f02000c;
+        public static final int pub=0x7f02000d;
+        public static final int screen=0x7f02000e;
+        public static final int screen2=0x7f02000f;
+        public static final int selector_tab_background=0x7f020010;
+        public static final int tab_activity_btn=0x7f020011;
+        public static final int tab_club_btn=0x7f020012;
+        public static final int tab_mine_btn=0x7f020013;
+        public static final int thumb_holder=0x7f020014;
+        public static final int word=0x7f020015;
+        public static final int xianjian01=0x7f020016;
+        public static final int xianjian02=0x7f020017;
+        public static final int xianjian03=0x7f020018;
     }
     public static final class id {
         public static final int action_help=0x7f080011;
